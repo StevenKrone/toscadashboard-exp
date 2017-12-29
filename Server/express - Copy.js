@@ -3,6 +3,46 @@ const app = express()
 const http = require('http')
 const request = require("request");
 
+// var objectID = '39e34a80-7b62-0c76-b111-eb7830121572';
+
+// var options_object = { method: 'GET', url: 'http://usalntosdbp01/Rest/ToscaCommander/ToscaStagingDB/object/'+objectID,
+// headers: { 'Postman-Token': '19b5e81a-ac05-3ac4-104d-9da217401f5a',    'Cache-Control': 'no-cache',    Authorization: 'Basic QWRtaW46QWRtaW4=',    Accept: 'application/json' } };
+
+// var options_gettestcaselogs = { method: 'GET', url: 'http://usalntosdbp01/Rest/ToscaCommander/ToscaStagingDB/object/39e3256a-55af-759e-757b-71ad570f0bb6/testcaselogswithtestcases',
+// headers:{ 'Postman-Token': '19b5e81a-ac05-3ac4-104d-9da217401f5a',    'Cache-Control': 'no-cache',    Authorization: 'Basic QWRtaW46QWRtaW4=',    Accept: 'application/json' } };
+
+
+
+
+//     var object_response;
+//     var execution_response;
+    
+// request(options_object, function (error, response, body) {
+//     if (error) throw new Error(error); 
+//     var obj = JSON.parse(body); 
+//     console.log(obj);  
+//     console.log(''); 
+//     object_response = body;
+//      //extractID_testcaselogs(body);
+//   });
+
+//   request(options_gettestcaselogs, function (error, response, body) {
+//     if (error) throw new Error(error); 
+//     var obj = JSON.parse(body); 
+//     console.log(obj);  
+//     console.log(''); 
+//     execution_response = body;
+//      //extractID_testcaselogs(body);
+//   });
+
+
+// app.use('/api/object', (req, res) => 
+//     res.header("Access-Control-Allow-Origin", "*")
+//         .header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+//         .send(object_response)
+// )
+
+// app.use('/api/executionlistwithtests', (req, res) => res.header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept").send(execution_response))
 
 var object_route_response;
 
@@ -32,7 +72,7 @@ app.param('id', function(req,res, next, id){
   });
 
 
-app.param('id_x', function(req,res, next, id){
+  app.param('id_x', function(req,res, next, id){
     //UniqueID for Tosca API
     objectID = id;
 
@@ -52,7 +92,7 @@ app.param('id_x', function(req,res, next, id){
         });
 
     next();
-});
+  });
 
 
 app.use('/api/object/:id', function(req, res, id){
@@ -71,6 +111,11 @@ app.use('/api/execlist/:id_x/', function(req, res, id){
 })
 
 
+// app.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+//   });
 
 
 
@@ -80,3 +125,5 @@ app.set('port', port);
 const server = http.createServer(app);
 
 server.listen(port, () => console.log(`API running on localhost:${port}`));
+
+//app.listen(3000, () => console.log('Example app listening on port 3000!'))
